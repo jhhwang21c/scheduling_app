@@ -50,19 +50,24 @@
 
 	function toggleCellColor(cell) {
 		// cell.classList.toggle('highlight');
-		console.log(currColor)
-		console.log(startColor)
-		if (startColor === 'green' & currColor === 'yellow') { // can only select green times from set of yellow times
-			cell.style.backgroundColor = 'green';
+
+		// console.log('currColor: ' + currColor)
+		// console.log('startColor: ' + startColor)
+		// console.log(' ')
+		if (startColor === 'green' && currColor == 'yellow' && cell.style.backgroundColor === '') { // do not allow users to change blank times to green
+			cell.style.backgroundColor = '';
 		} else {
-			if (startColor === 'green' & currColor !== '') { // when deselect green, goes back to yellow
-				cell.style.backgroundColor = 'yellow';
+			if (startColor === 'green' && currColor === 'yellow') { // can only select green times from set of yellow times
+			cell.style.backgroundColor = 'green'; 
 			}
-			if (startColor === 'yellow' & currColor === '') { // first select yellow times
-				cell.style.backgroundColor = 'yellow';
+			if (startColor === 'green' && currColor === 'green' && cell.style.backgroundColor !== '') { // when deselect green, goes back to yellow
+				cell.style.backgroundColor = 'yellow'; 
 			}
-			if (startColor === 'yellow' & currColor !== '') { // deselect yellow times
-				cell.style.backgroundColor = '';
+			if (startColor === 'yellow' && currColor === '') { // first select yellow times
+				cell.style.backgroundColor = 'yellow'; 
+			}
+			if (startColor === 'yellow' && currColor !== '') { // deselect yellow times
+				cell.style.backgroundColor = ''; 
 			}
 		}
 	}
