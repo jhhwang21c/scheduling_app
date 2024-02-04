@@ -4,16 +4,20 @@
 	let isDragging = false;
 	let startColor = null; // green or yellow
 	let currColor = null; // green, yellow, or white
+	let isPreferred = false;
 
 
-	function getColor(event) {
-		if (document.getElementById('preferred_time').checked) {
-			startColor = 'green';
-		}
-		else {
-			startColor = 'yellow';
-		}
-	}
+	// function getColor(event) {
+	// 	if (document.getElementById('preferred_time').checked) {
+	// 		startColor = 'green';
+	// 	}
+	// 	else {
+	// 		startColor = 'yellow';
+	// 	}
+	// }
+	function getColor() {
+        startColor = isPreferred ? 'green' : 'yellow';
+    }
 
 	function handleMouseDown(event) {
 		isDragging = true;
@@ -47,6 +51,13 @@
 	function handleMouseUp() {
 		isDragging = false;
 	}
+
+	function togglePreferredTime() {
+        isPreferred = !isPreferred;
+        getColor();
+		console.log(isPreferred)
+		console.log(startColor)
+    }
 
 	function toggleCellColor(cell) {
 		// cell.classList.toggle('highlight');
@@ -87,11 +98,18 @@
 		Google
 		Calendar</button>
 
-	<input type="radio" id="not_preferred_time" name="time" value="not_preferred_time" checked />
-	<label for="not_preferred_time">Available, but Not Preferred</label>
+	<div  style ="text-align:center;">
+	<span>Available but not preferred</span>
+	<label class="switch">
+		<input type="checkbox" bind:checked={isPreferred} on:click={togglePreferredTime}>
+		<span class="slider round"></span>
+	</label>
+	<span>Available and preferred</span>
+</div>
+<!-- <label for="not_preferred_time">Available, but Not Preferred</label> -->
 
-	<input type="radio" id="preferred_time" name="time" value="preferred_time" />
-	<label for="preferred_time">Preferred Time</label>
+<!-- <input type="radio" id="preferred_time" name="time" value="preferred_time" />
+<label for="preferred_time">Preferred Time</label> -->
 
 	<div>Click and Drag to select time slots</div>
 	<div class="cal-container"><b class="month">February 2024</b>
@@ -199,6 +217,7 @@
 			<div class="grid-item">16:30</div>
 		</div>
 	</div>
+
 </div>
 
 <style>
@@ -256,5 +275,73 @@
 
 	.sync {
 		background-color: rgb(254, 155, 155);
+	}
+
+	/* Toggle button CSS */
+	.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+	border: 1px solid black;
+	border-radius: 70px;
+	}
+
+	.switch input { 
+	opacity: 0;
+	width: 0;
+	height: 0;
+	}
+
+	.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: yellow;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-color: black;
+	border-radius: 100%;
+	}
+
+	.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: rgb(230, 230, 230);
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-color: black;
+	}
+
+	input:checked + .slider {
+	background-color: green;
+	}
+
+	input:focus + .slider {
+	box-shadow: 0 0 1px green;
+	}
+
+	input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
+	}
+
+	/* Rounded sliders */
+	.slider.round {
+	border-radius: 34px;
+	border-color: black;
+	}
+
+	.slider.round:before {
+	border-radius: 50%;
+	border-color: black;
 	}
 </style>
