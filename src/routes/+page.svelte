@@ -38,9 +38,25 @@
 			cell.style.backgroundColor = 'green'; // Set the background color to green
 		}
 	}
+
+	function syncCal() {
+		// var element = document.getElementById("1");
+		// console.log(element);
+		// element.classList.toggle("test");
+		// classList.toggle("test");
+
+		document.querySelectorAll('.this').forEach(el => {
+			el.classList.toggle('test');
+			console.log(el)
+		});
+
+
+	}
+
 </script>
 
-<button>sync</button>
+<button on:click={syncCal}>sync</button>
+<div class="test"></div>
 
 <input type="radio" id="not_preferred_time" name="time" value="not_preferred_time" checked />
 <label for="not_preferred_time">Available, but Not Preferred</label>
@@ -48,22 +64,16 @@
 <input type="radio" id="preferred_time" name="time" value="preferred_time" />
 <label for="preferred_time">Preferred Time</label>
 
-<div
-	class="grid-container"
-	role="grid"
-	tabindex="-1"
-	on:mousemove={handleMouseMove}
-	on:mousedown={handleMouseDown}
-	on:mouseup={handleMouseUp}
->
+<div class="grid-container" role="grid" tabindex="-1" on:mousemove={handleMouseMove} on:mousedown={handleMouseDown}
+	on:mouseup={handleMouseUp}>
 	<div class="days">Mon</div>
 	<div class="days">Tue</div>
 	<div class="days">Wed</div>
 	<div class="days">Thu</div>
 	<div class="days">Fri</div>
+	<div class="grid-item this">9:00</div>
 	<div class="grid-item">9:00</div>
-	<div class="grid-item">9:00</div>
-	<div class="grid-item">9:00</div>
+	<div class="grid-item this">9:00</div>
 	<div class="grid-item">9:00</div>
 	<div class="grid-item">9:00</div>
 
@@ -182,5 +192,9 @@
 		text-align: center;
 		font-weight: bold;
 		font-size: 16px;
+	}
+
+	.test {
+		background-color: red;
 	}
 </style>
