@@ -1,12 +1,24 @@
 <script>
 	let isDragging = false;
-	let startColor = null;
+	let startColor = null; // green or yellow
+	let currColor = null; // green, yellow, or white
+
+	function getColor(event) {
+		if (document.getElementById('preferred_time').checked) {
+			startColor = 'green';
+		}
+		else {
+			startColor = 'yellow';
+		}
+	}
 
 	function handleMouseDown(event) {
 		isDragging = true;
 		const target = event.target;
 		if (target.classList.contains('grid-item')) {
-			startColor = target.style.backgroundColor;
+			// startColor = target.style.backgroundColor;
+			currColor = target.style.backgroundColor;
+			getColor(event);
 			handleMouseMove(event);
 		}
 	}
@@ -14,15 +26,18 @@
 	function handleMouseMove(event) {
 		if (isDragging) {
 			const target = event.target;
-			if (target.classList.contains('grid-item')) {
-				if (startColor === 'green') {
-					toggleCellColor(target);
-				} else {
-					if (target.style.backgroundColor !== 'green') {
-						toggleCellColor(target);
-					}
-				}
-			}
+			// if (target.classList.contains('grid-item')) {
+			// 	if (startColor === 'green') {
+			// 		toggleCellColor(target);
+			// 	} else {
+			// 		if (target.style.backgroundColor !== 'green') {
+			// 			toggleCellColor(target);
+			// 		}
+			// 	}
+			// }
+            if (target.classList.contains('grid-item')) {
+                toggleCellColor(target);
+            }
 		}
 	}
 
@@ -32,10 +47,20 @@
 
 	function toggleCellColor(cell) {
 		// cell.classList.toggle('highlight');
-		if (startColor === 'green') {
-			cell.style.backgroundColor = ''; // Remove the background color
+		console.log(currColor)
+		console.log(startColor)
+		if (startColor === 'green' & currColor === 'yellow') { // can only select green times from set of yellow times
+			cell.style.backgroundColor = 'green'; 
 		} else {
-			cell.style.backgroundColor = 'green'; // Set the background color to green
+			if (startColor === 'green' & currColor !== '') { // when deselect green, goes back to yellow
+				cell.style.backgroundColor = 'yellow'; 
+			}
+			if (startColor === 'yellow' & currColor === '') { // first select yellow times
+				cell.style.backgroundColor = 'yellow'; 
+			}
+			if (startColor === 'yellow' & currColor !== '') { // deselect yellow times
+				cell.style.backgroundColor = ''; 
+			}
 		}
 	}
 
