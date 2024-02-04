@@ -1,7 +1,10 @@
 <script>
+	import gcal_icon from '$lib/assests/gcal_icon.png';
+
 	let isDragging = false;
 	let startColor = null; // green or yellow
 	let currColor = null; // green, yellow, or white
+
 
 	function getColor(event) {
 		if (document.getElementById('preferred_time').checked) {
@@ -35,9 +38,9 @@
 			// 		}
 			// 	}
 			// }
-            if (target.classList.contains('grid-item')) {
-                toggleCellColor(target);
-            }
+			if (target.classList.contains('grid-item')) {
+				toggleCellColor(target);
+			}
 		}
 	}
 
@@ -50,16 +53,16 @@
 		console.log(currColor)
 		console.log(startColor)
 		if (startColor === 'green' & currColor === 'yellow') { // can only select green times from set of yellow times
-			cell.style.backgroundColor = 'green'; 
+			cell.style.backgroundColor = 'green';
 		} else {
 			if (startColor === 'green' & currColor !== '') { // when deselect green, goes back to yellow
-				cell.style.backgroundColor = 'yellow'; 
+				cell.style.backgroundColor = 'yellow';
 			}
 			if (startColor === 'yellow' & currColor === '') { // first select yellow times
-				cell.style.backgroundColor = 'yellow'; 
+				cell.style.backgroundColor = 'yellow';
 			}
 			if (startColor === 'yellow' & currColor !== '') { // deselect yellow times
-				cell.style.backgroundColor = ''; 
+				cell.style.backgroundColor = '';
 			}
 		}
 	}
@@ -80,7 +83,7 @@
 
 </script>
 
-<button on:click={syncCal}>sync</button>
+<button on:click={syncCal}><img src={gcal_icon} width="20px" alt="gcal icon" />sync with Google Calendar</button>
 <div class="test"></div>
 
 <input type="radio" id="not_preferred_time" name="time" value="not_preferred_time" checked />
@@ -96,11 +99,11 @@
 	<div class="days">Wed</div>
 	<div class="days">Thu</div>
 	<div class="days">Fri</div>
-	<div class="grid-item this">9:00</div>
-	<div class="grid-item">9:00</div>
-	<div class="grid-item this">9:00</div>
 	<div class="grid-item">9:00</div>
 	<div class="grid-item">9:00</div>
+	<div class="grid-item">9:00</div>
+	<div class="grid-item">9:00</div>
+	<div class="grid-item">9:00</div>
 
 	<div class="grid-item">9:30</div>
 	<div class="grid-item">9:30</div>
@@ -117,13 +120,13 @@
 	<div class="grid-item">10:30</div>
 	<div class="grid-item">10:30</div>
 	<div class="grid-item">10:30</div>
+	<div class="grid-item this">10:30</div>
 	<div class="grid-item">10:30</div>
-	<div class="grid-item">10:30</div>
 
 	<div class="grid-item">11:00</div>
 	<div class="grid-item">11:00</div>
 	<div class="grid-item">11:00</div>
-	<div class="grid-item">11:00</div>
+	<div class="grid-item this">11:00</div>
 	<div class="grid-item">11:00</div>
 
 	<div class="grid-item">11:30</div>
@@ -133,32 +136,32 @@
 	<div class="grid-item">11:30</div>
 
 	<div class="grid-item">12:00</div>
+	<div class="grid-item this">12:00</div>
 	<div class="grid-item">12:00</div>
-	<div class="grid-item">12:00</div>
-	<div class="grid-item">12:00</div>
+	<div class="grid-item this">12:00</div>
 	<div class="grid-item">12:00</div>
 
 	<div class="grid-item">12:30</div>
-	<div class="grid-item">12:30</div>
-	<div class="grid-item">12:30</div>
-	<div class="grid-item">12:30</div>
+	<div class="grid-item this">12:30</div>
+	<div class="grid-item this">12:30</div>
+	<div class="grid-item this">12:30</div>
 	<div class="grid-item">12:30</div>
 
 	<div class="grid-item">13:00</div>
-	<div class="grid-item">13:00</div>
-	<div class="grid-item">13:00</div>
-	<div class="grid-item">13:00</div>
+	<div class="grid-item this">13:00</div>
+	<div class="grid-item this">13:00</div>
+	<div class="grid-item this">13:00</div>
 	<div class="grid-item">13:00</div>
 
-	<div class="grid-item">13:30</div>
-	<div class="grid-item">13:30</div>
-	<div class="grid-item">13:30</div>
+	<div class="grid-item this">13:30</div>
+	<div class="grid-item this">13:30</div>
+	<div class="grid-item this">13:30</div>
 	<div class="grid-item">13:30</div>
 	<div class="grid-item">13:30</div>
 
-	<div class="grid-item">14:00</div>
-	<div class="grid-item">14:00</div>
-	<div class="grid-item">14:00</div>
+	<div class="grid-item this">14:00</div>
+	<div class="grid-item this">14:00</div>
+	<div class="grid-item this">14:00</div>
 	<div class="grid-item">14:00</div>
 	<div class="grid-item">14:00</div>
 
@@ -169,27 +172,27 @@
 	<div class="grid-item">14:30</div>
 
 	<div class="grid-item">15:00</div>
-	<div class="grid-item">15:00</div>
+	<div class="grid-item this">15:00</div>
 	<div class="grid-item">15:00</div>
 	<div class="grid-item">15:00</div>
 	<div class="grid-item">15:00</div>
 
-	<div class="grid-item">15:30</div>
-	<div class="grid-item">15:30</div>
-	<div class="grid-item">15:30</div>
+	<div class="grid-item this">15:30</div>
+	<div class="grid-item this">15:30</div>
+	<div class="grid-item this">15:30</div>
 	<div class="grid-item">15:30</div>
 	<div class="grid-item">15:30</div>
 
-	<div class="grid-item">16:00</div>
-	<div class="grid-item">16:00</div>
-	<div class="grid-item">16:00</div>
+	<div class="grid-item this">16:00</div>
+	<div class="grid-item this">16:00</div>
+	<div class="grid-item this">16:00</div>
 	<div class="grid-item">16:00</div>
 	<div class="grid-item">16:00</div>
 
-	<div class="grid-item">16:30</div>
-	<div class="grid-item">16:30</div>
-	<div class="grid-item">16:30</div>
-	<div class="grid-item">16:30</div>
+	<div class="grid-item this">16:30</div>
+	<div class="grid-item this">16:30</div>
+	<div class="grid-item this">16:30</div>
+	<div class="grid-item this">16:30</div>
 	<div class="grid-item">16:30</div>
 </div>
 
@@ -220,6 +223,6 @@
 	}
 
 	.test {
-		background-color: red;
+		background-color: rgb(254, 155, 155);
 	}
 </style>
