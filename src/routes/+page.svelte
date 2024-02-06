@@ -16,8 +16,8 @@
 	// 	}
 	// }
 	function getColor() {
-        startColor = isPreferred ? 'green' : 'yellow';
-    }
+		startColor = isPreferred ? 'green' : 'yellow';
+	}
 
 	function handleMouseDown(event) {
 		isDragging = true;
@@ -53,11 +53,11 @@
 	}
 
 	function togglePreferredTime() {
-        isPreferred = !isPreferred;
-        getColor();
+		isPreferred = !isPreferred;
+		getColor();
 		console.log(isPreferred)
 		console.log(startColor)
-    }
+	}
 
 	function toggleCellColor(cell) {
 		// cell.classList.toggle('highlight');
@@ -93,33 +93,38 @@
 </script>
 
 <div class="sync"></div>
-<div class="content">
-	<button on:click={syncCal} class="button"><img class="gcal" src={gcal_icon} width="20px" alt="gcal icon" />sync with
-		Google
-		Calendar</button>
+<button on:click={syncCal} class="button"><img class="gcal" src={gcal_icon} width="20px" alt="gcal icon" />sync with
+	Google
+	Calendar</button>
 
-	<div  style ="text-align:center;">
-	<span>Available but not preferred</span>
+<div class="togglebox">
+	<span style="margin-right: 10px;">Available but not preferred</span>
 	<label class="switch">
 		<input type="checkbox" bind:checked={isPreferred} on:click={togglePreferredTime}>
 		<span class="slider round"></span>
 	</label>
-	<span>Available and preferred</span>
+	<span style="margin-left: 10px;">Available and preferred</span>
 </div>
-<!-- <label for="not_preferred_time">Available, but Not Preferred</label> -->
+<div class="instruction">Click and drag to select all available times (including both times that work well and times
+	that are not 100% the best), which will be highlighted in yellow. Use the toggle button to change color to green,
+	and select (over
+	the set of yellow times) times that are preferred. Saved immediately.</div>
+<div class="content">
 
-<!-- <input type="radio" id="preferred_time" name="time" value="preferred_time" />
+	<!-- <label for="not_preferred_time">Available, but Not Preferred</label> -->
+
+	<!-- <input type="radio" id="preferred_time" name="time" value="preferred_time" />
 <label for="preferred_time">Preferred Time</label> -->
 
-	<div>Click and Drag to select time slots</div>
+
 	<div class="cal-container"><b class="month">February 2024</b>
 		<div class="grid-container" role="grid" tabindex="-1" on:mousemove={handleMouseMove}
 			on:mousedown={handleMouseDown} on:mouseup={handleMouseUp}>
-			<div class="days">Mon 5</div>
-			<div class="days">Tue 6</div>
 			<div class="days">Wed 7</div>
 			<div class="days">Thu 8</div>
 			<div class="days">Fri 9</div>
+			<div class="days">Sat 10</div>
+			<div class="days">Sun 11</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
@@ -221,10 +226,20 @@
 </div>
 
 <style>
+	.instruction {
+		position: fixed;
+		left: 50px;
+		top: 20vh;
+		border: 1px solid black;
+		border-radius: 20px;
+		padding: 20px;
+		width: 300px;
+	}
+
 	.content {
-		max-width: 600px;
+		width: 600px;
 		margin: auto;
-		padding-top: 20px;
+		padding-top: 40px;
 	}
 
 	.button {
@@ -232,6 +247,18 @@
 		justify-content: center;
 		align-items: center;
 		font-size: 14px;
+		position: fixed;
+		left: 30vw;
+		top: 15px
+	}
+
+	.togglebox {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 14px;
+		position: fixed;
+		right: 30vw;
 	}
 
 	.gcal {
@@ -279,69 +306,69 @@
 
 	/* Toggle button CSS */
 	.switch {
-	position: relative;
-	display: inline-block;
-	width: 60px;
-	height: 34px;
-	border: 1px solid black;
-	border-radius: 70px;
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		border: 1px solid black;
+		border-radius: 70px;
 	}
 
-	.switch input { 
-	opacity: 0;
-	width: 0;
-	height: 0;
+	.switch input {
+		opacity: 0;
+		width: 0;
+		height: 0;
 	}
 
 	.slider {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: yellow;
-	-webkit-transition: .4s;
-	transition: .4s;
-	border-color: black;
-	border-radius: 100%;
+		position: absolute;
+		cursor: pointer;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: yellow;
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-color: black;
+		border-radius: 100%;
 	}
 
 	.slider:before {
-	position: absolute;
-	content: "";
-	height: 26px;
-	width: 26px;
-	left: 4px;
-	bottom: 4px;
-	background-color: rgb(230, 230, 230);
-	-webkit-transition: .4s;
-	transition: .4s;
-	border-color: black;
+		position: absolute;
+		content: "";
+		height: 26px;
+		width: 26px;
+		left: 4px;
+		bottom: 4px;
+		background-color: rgb(230, 230, 230);
+		-webkit-transition: .4s;
+		transition: .4s;
+		border-color: black;
 	}
 
-	input:checked + .slider {
-	background-color: green;
+	input:checked+.slider {
+		background-color: green;
 	}
 
-	input:focus + .slider {
-	box-shadow: 0 0 1px green;
+	input:focus+.slider {
+		box-shadow: 0 0 1px green;
 	}
 
-	input:checked + .slider:before {
-	-webkit-transform: translateX(26px);
-	-ms-transform: translateX(26px);
-	transform: translateX(26px);
+	input:checked+.slider:before {
+		-webkit-transform: translateX(26px);
+		-ms-transform: translateX(26px);
+		transform: translateX(26px);
 	}
 
 	/* Rounded sliders */
 	.slider.round {
-	border-radius: 34px;
-	border-color: black;
+		border-radius: 34px;
+		border-color: black;
 	}
 
 	.slider.round:before {
-	border-radius: 50%;
-	border-color: black;
+		border-radius: 50%;
+		border-color: black;
 	}
 </style>
