@@ -74,28 +74,31 @@
 	Calendar</button>
 
 <div class="togglebox">
-	<span style="margin-right: 10px;">Available but not preferred</span>
+	<span style="margin-right: 10px;">Available</span>
 	<label class="switch">
 		<input type="checkbox" bind:checked={isPreferred} on:click={togglePreferredTime}>
 		<span class="slider round"></span>
 	</label>
-	<span style="margin-left: 10px;">Available and preferred</span>
+	<span style="margin-left: 10px;">Preferred</span>
 </div>
 <div class="instruction">Click and drag to select all available times (including both times that work well and times
-	that are not 100% the best), which will be highlighted in yellow. Use the toggle button to change color to green,
+	that are not 100% the best), which will be highlighted in yellow.
+	<br>Use the toggle button to change color to green,
 	and select (over
-	the set of yellow times) times that are preferred. Saved immediately.</div>
+	the set of yellow times) times that are preferred.
+	<br>Saved immediately.
+</div>
 <div class="content">
 
 
 	<div class="cal-container"><b class="month">February 2024</b>
 		<div class="grid-container" role="grid" tabindex="-1" on:mousemove={handleMouseMove}
 			on:mousedown={handleMouseDown} on:mouseup={handleMouseUp}>
-			<div class="days">Wed 7</div>
-			<div class="days">Thu 8</div>
-			<div class="days">Fri 9</div>
-			<div class="days">Sat 10</div>
-			<div class="days">Sun 11</div>
+			<div class="days">Wed 14</div>
+			<div class="days">Thu 15</div>
+			<div class="days">Fri 16</div>
+			<div class="days">Sat 17</div>
+			<div class="days">Sun 18</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
@@ -203,8 +206,9 @@
 		top: 20vh;
 		border: 1px solid black;
 		border-radius: 20px;
-		padding: 20px;
-		width: 300px;
+		padding: 15px;
+		width: 320px;
+		font-size: 18px;
 	}
 
 	.content {
