@@ -6,15 +6,6 @@
 	let currColor = null; // green, yellow, or white
 	let isPreferred = false;
 
-
-	// function getColor(event) {
-	// 	if (document.getElementById('preferred_time').checked) {
-	// 		startColor = 'green';
-	// 	}
-	// 	else {
-	// 		startColor = 'yellow';
-	// 	}
-	// }
 	function getColor() {
 		startColor = isPreferred ? 'green' : 'yellow';
 	}
@@ -23,7 +14,6 @@
 		isDragging = true;
 		const target = event.target;
 		if (target.classList.contains('grid-item')) {
-			// startColor = target.style.backgroundColor;
 			currColor = target.style.backgroundColor;
 			getColor(event);
 			handleMouseMove(event);
@@ -33,15 +23,6 @@
 	function handleMouseMove(event) {
 		if (isDragging) {
 			const target = event.target;
-			// if (target.classList.contains('grid-item')) {
-			// 	if (startColor === 'green') {
-			// 		toggleCellColor(target);
-			// 	} else {
-			// 		if (target.style.backgroundColor !== 'green') {
-			// 			toggleCellColor(target);
-			// 		}
-			// 	}
-			// }
 			if (target.classList.contains('grid-item')) {
 				toggleCellColor(target);
 			}
@@ -60,24 +41,19 @@
 	}
 
 	function toggleCellColor(cell) {
-		// cell.classList.toggle('highlight');
-
-		// console.log('currColor: ' + currColor)
-		// console.log('startColor: ' + startColor)
-		// console.log(' ')
 		if (startColor === 'green' && currColor == 'yellow' && cell.style.backgroundColor === '') { // do not allow users to change blank times to green
 			cell.style.backgroundColor = '';
 		} else {
 			if (startColor === 'green' && currColor === 'yellow') { // can only select green times from set of yellow times
 				cell.style.backgroundColor = 'green';
 			}
-			if (startColor === 'green' && currColor === 'green' && cell.style.backgroundColor !== '') { // when deselect green, goes back to yellow
+			if (startColor === 'green' && currColor === 'green' && cell.style.backgroundColor !== '') { // when deselect green on green toggle, goes back to yellow
 				cell.style.backgroundColor = 'yellow';
 			}
 			if (startColor === 'yellow' && currColor === '') { // first select yellow times
 				cell.style.backgroundColor = 'yellow';
 			}
-			if (startColor === 'yellow' && currColor !== '') { // deselect yellow times
+			if (startColor === 'yellow' && currColor !== '') { // deselect yellow + green times when toggle is on yellow -> blank
 				cell.style.backgroundColor = '';
 			}
 		}
@@ -110,11 +86,6 @@
 	and select (over
 	the set of yellow times) times that are preferred. Saved immediately.</div>
 <div class="content">
-
-	<!-- <label for="not_preferred_time">Available, but Not Preferred</label> -->
-
-	<!-- <input type="radio" id="preferred_time" name="time" value="preferred_time" />
-<label for="preferred_time">Preferred Time</label> -->
 
 
 	<div class="cal-container"><b class="month">February 2024</b>
