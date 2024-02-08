@@ -5,6 +5,8 @@
 	let startColor = null; // green or yellow
 	let currColor = null; // green, yellow, or white
 	let isPreferred = false;
+	let isSync = false;
+	let syncText = 'Show';
 
 	function getColor() {
 		startColor = isPreferred ? 'green' : 'yellow';
@@ -60,42 +62,66 @@
 	}
 
 	function syncCal() {
+		isSync = !isSync;
+		if (isSync) {
+			syncText = 'Hide'
+		} else {
+			syncText = 'Show'
+		}
 		document.querySelectorAll('.this').forEach(el => {
 			el.classList.toggle('sync');
-			console.log(el)
+		});
+
+		document.querySelectorAll('.conflict').forEach(el => {
+			el.classList.toggle('hide');
 		});
 	}
 
 </script>
 
 <div class="sync"></div>
-<button on:click={syncCal} class="button"><img class="gcal" src={gcal_icon} width="20px" alt="gcal icon" />sync with
+<div class="hide"></div>
+<button on:click={syncCal} class="button"><img class="gcal" src={gcal_icon} width="20px" alt="gcal icon" />{syncText}
 	Google
 	Calendar</button>
 
 <div class="togglebox">
-	<span style="margin-right: 10px;">Available but not preferred</span>
+	<span style="margin-right: 10px;">Available</span>
 	<label class="switch">
 		<input type="checkbox" bind:checked={isPreferred} on:click={togglePreferredTime}>
 		<span class="slider round"></span>
 	</label>
-	<span style="margin-left: 10px;">Available and preferred</span>
+	<span style="margin-left: 10px;">Preferred</span>
 </div>
-<div class="instruction">Click and drag to select all available times (including both times that work well and times
-	that are not 100% the best), which will be highlighted in yellow. Use the toggle button to change color to green,
-	and select (over
-	the set of yellow times) times that are preferred. Saved immediately.</div>
+<div class="instruction">
+	<ol>
+		<li><u>Show</u> or <u>hide</u> Google Calendar by pressing the button
+			<ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+				<li style="margin-left:2em">Hover over Google Calendar events to display event name
+				</li>
+			</ol>
+		</li>
+		<br>
+		<li><u>Toggle button on Available:</u> Select all available times (yellow)
+		</li>
+		<br>
+		<li><u>Toggle button on Preferred:</u> From all available times (yellow), select preferred times (green)</li>
+		<br>
+		*Saved Immediately*
+	</ol>
+
+</div>
 <div class="content">
 
 
 	<div class="cal-container"><b class="month">February 2024</b>
 		<div class="grid-container" role="grid" tabindex="-1" on:mousemove={handleMouseMove}
 			on:mousedown={handleMouseDown} on:mouseup={handleMouseUp}>
-			<div class="days">Wed 7</div>
-			<div class="days">Thu 8</div>
-			<div class="days">Fri 9</div>
-			<div class="days">Sat 10</div>
-			<div class="days">Sun 11</div>
+			<div class="days">Mon 12</div>
+			<div class="days">Tue 13</div>
+			<div class="days">Wed 14</div>
+			<div class="days">Thu 15</div>
+			<div class="days">Fri 16</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
 			<div class="grid-item">9:00</div>
@@ -117,13 +143,17 @@
 			<div class="grid-item">10:30</div>
 			<div class="grid-item">10:30</div>
 			<div class="grid-item">10:30</div>
-			<div class="grid-item this">10:30</div>
+			<div class="grid-item this">10:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA Section</span></div>
+			</div>
 			<div class="grid-item">10:30</div>
 
 			<div class="grid-item">11:00</div>
 			<div class="grid-item">11:00</div>
 			<div class="grid-item">11:00</div>
-			<div class="grid-item this">11:00</div>
+			<div class="grid-item this">11:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA Section</span></div>
+			</div>
 			<div class="grid-item">11:00</div>
 
 			<div class="grid-item">11:30</div>
@@ -133,32 +163,60 @@
 			<div class="grid-item">11:30</div>
 
 			<div class="grid-item">12:00</div>
-			<div class="grid-item this">12:00</div>
+			<div class="grid-item this">12:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
 			<div class="grid-item">12:00</div>
-			<div class="grid-item this">12:00</div>
+			<div class="grid-item this">12:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
 			<div class="grid-item">12:00</div>
 
 			<div class="grid-item">12:30</div>
-			<div class="grid-item this">12:30</div>
-			<div class="grid-item this">12:30</div>
-			<div class="grid-item this">12:30</div>
+			<div class="grid-item this">12:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
+			<div class="grid-item this">12:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">Lunch with Bob</span></div>
+			</div>
+			<div class="grid-item this">12:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
 			<div class="grid-item">12:30</div>
 
 			<div class="grid-item">13:00</div>
-			<div class="grid-item this">13:00</div>
-			<div class="grid-item this">13:00</div>
-			<div class="grid-item this">13:00</div>
+			<div class="grid-item this">13:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
+			<div class="grid-item this">13:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">Lunch with Bob</span></div>
+			</div>
+			<div class="grid-item this">13:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">HAA 11</span></div>
+			</div>
 			<div class="grid-item">13:00</div>
 
-			<div class="grid-item this">13:30</div>
-			<div class="grid-item this">13:30</div>
-			<div class="grid-item this">13:30</div>
+			<div class="grid-item this">13:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED 1046</span></div>
+			</div>
+			<div class="grid-item this">13:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED Section</span></div>
+			</div>
+			<div class="grid-item this">13:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED 1046</span></div>
+			</div>
 			<div class="grid-item">13:30</div>
 			<div class="grid-item">13:30</div>
 
-			<div class="grid-item this">14:00</div>
-			<div class="grid-item this">14:00</div>
-			<div class="grid-item this">14:00</div>
+			<div class="grid-item this">14:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED 1046</span></div>
+			</div>
+			<div class="grid-item this">14:00<div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED Section</span></div>
+			</div>
+			<div class="grid-item this">14:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">GENED 1046</span></div>
+			</div>
 			<div class="grid-item">14:00</div>
 			<div class="grid-item">14:00</div>
 
@@ -169,27 +227,39 @@
 			<div class="grid-item">14:30</div>
 
 			<div class="grid-item">15:00</div>
-			<div class="grid-item this">15:00</div>
+			<div class="grid-item">15:00</div>
 			<div class="grid-item">15:00</div>
 			<div class="grid-item">15:00</div>
 			<div class="grid-item">15:00</div>
 
-			<div class="grid-item this">15:30</div>
-			<div class="grid-item this">15:30</div>
-			<div class="grid-item this">15:30</div>
+			<div class="grid-item this">15:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
+			<div class="grid-item">15:30 </div>
+			<div class="grid-item this">15:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
 			<div class="grid-item">15:30</div>
 			<div class="grid-item">15:30</div>
 
-			<div class="grid-item this">16:00</div>
-			<div class="grid-item this">16:00</div>
-			<div class="grid-item this">16:00</div>
+			<div class="grid-item this">16:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
+			<div class="grid-item ">16:00 </div>
+			<div class="grid-item this">16:00 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
 			<div class="grid-item">16:00</div>
 			<div class="grid-item">16:00</div>
 
-			<div class="grid-item this">16:30</div>
-			<div class="grid-item this">16:30</div>
-			<div class="grid-item this">16:30</div>
-			<div class="grid-item this">16:30</div>
+			<div class="grid-item this">16:30<div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
+			<div class="grid-item ">16:30 </div>
+			<div class="grid-item this">16:30 <div class="conflict tooltip" style="display: none;">...<span
+						class="tooltiptext">CS 178</span></div>
+			</div>
+			<div class="grid-item ">16:30 </div>
 			<div class="grid-item">16:30</div>
 		</div>
 	</div>
@@ -198,18 +268,20 @@
 
 <style>
 	.instruction {
-		position: fixed;
-		left: 50px;
-		top: 20vh;
+		position: absolute;
+		left: 5%;
+		top: 200px;
 		border: 1px solid black;
 		border-radius: 20px;
-		padding: 20px;
-		width: 300px;
+		padding: 10px;
+		width: 490px;
+		font-size: 18px;
 	}
 
 	.content {
+		position: absolute;
 		width: 600px;
-		margin: auto;
+		right: 12%;
 		padding-top: 40px;
 	}
 
@@ -219,8 +291,8 @@
 		align-items: center;
 		font-size: 14px;
 		position: fixed;
-		left: 30vw;
-		top: 15px
+		left: 100px;
+		top: 100px
 	}
 
 	.togglebox {
@@ -229,11 +301,16 @@
 		align-items: center;
 		font-size: 14px;
 		position: fixed;
-		right: 30vw;
+		left: 350px;
+		top: 95px;
 	}
 
 	.gcal {
 		margin-right: 5px;
+	}
+
+	.hide {
+		display: block !important;
 	}
 
 	.cal-container {
@@ -341,5 +418,31 @@
 	.slider.round:before {
 		border-radius: 50%;
 		border-color: black;
+	}
+
+
+	.tooltip {
+		position: relative;
+		bottom: 15px;
+		right: -80px;
+		font-weight: bold;
+		width: 30px;
+	}
+
+	.tooltip .tooltiptext {
+		visibility: hidden;
+		width: 100px;
+		background-color: black;
+		color: #fff;
+		text-align: center;
+		font-weight: lighter;
+		border-radius: 6px;
+		padding: 3px 0;
+		position: absolute;
+		z-index: 1;
+	}
+
+	.tooltip:hover .tooltiptext {
+		visibility: visible;
 	}
 </style>
