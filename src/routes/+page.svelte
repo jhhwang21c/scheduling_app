@@ -93,12 +93,23 @@
 	</label>
 	<span style="margin-left: 10px;">Preferred</span>
 </div>
-<div class="instruction">Click and drag to select all available times (including both times that work well and times
-	that are not 100% the best), which will be highlighted in yellow.
-	<br>Use the toggle button to change color to green,
-	and select (over
-	the set of yellow times) times that are preferred.
-	<br>Saved immediately.
+<div class="instruction">
+	<ol>
+		<li><u>Show</u> or <u>hide</u> Google Calendar by pressing the button
+			<ol style="list-style-type: lower-alpha; padding-bottom: 0;">
+				<li style="margin-left:2em">Hover over Google Calendar events to display event name
+				</li>
+			</ol>
+		</li>
+		<br>
+		<li><u>Toggle button on Available:</u> Select all available times (yellow)
+		</li>
+		<br>
+		<li><u>Toggle button on Preferred:</u> From all available times (yellow), select preferred times (green)</li>
+		<br>
+		*Saved Immediately*
+	</ol>
+
 </div>
 <div class="content">
 
@@ -257,19 +268,20 @@
 
 <style>
 	.instruction {
-		position: fixed;
-		left: 50px;
-		top: 20vh;
+		position: absolute;
+		left: 5%;
+		top: 200px;
 		border: 1px solid black;
 		border-radius: 20px;
-		padding: 15px;
-		width: 320px;
+		padding: 10px;
+		width: 490px;
 		font-size: 18px;
 	}
 
 	.content {
+		position: absolute;
 		width: 600px;
-		margin: auto;
+		right: 12%;
 		padding-top: 40px;
 	}
 
@@ -279,8 +291,8 @@
 		align-items: center;
 		font-size: 14px;
 		position: fixed;
-		left: 30vw;
-		top: 15px
+		left: 100px;
+		top: 100px
 	}
 
 	.togglebox {
@@ -289,7 +301,8 @@
 		align-items: center;
 		font-size: 14px;
 		position: fixed;
-		right: 30vw;
+		left: 350px;
+		top: 95px;
 	}
 
 	.gcal {
