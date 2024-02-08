@@ -1,6 +1,7 @@
 <script>
 	import gcal_icon from '$lib/assests/gcal_icon.png';
 
+	// isDragging, startColor, isPreferred variables came from ChatGPT
 	let isDragging = false;
 	let startColor = null; // green or yellow
 	let currColor = null; // green, yellow, or white
@@ -12,6 +13,7 @@
 		startColor = isPreferred ? 'green' : 'yellow';
 	}
 
+	// handleMouseDown, handleMouseMove, and handleMouseUp function ideas came from ChatGPT
 	function handleMouseDown(event) {
 		isDragging = true;
 		const target = event.target;
@@ -38,8 +40,6 @@
 	function togglePreferredTime() {
 		isPreferred = !isPreferred;
 		getColor();
-		console.log(isPreferred)
-		console.log(startColor)
 	}
 
 	function toggleCellColor(cell) {
@@ -352,7 +352,7 @@
 		background-color: rgb(254, 155, 155);
 	}
 
-	/* Toggle button CSS */
+	/* Toggle button CSS, from https://www.w3schools.com/howto/howto_css_switch.asp */
 	.switch {
 		position: relative;
 		display: inline-block;
